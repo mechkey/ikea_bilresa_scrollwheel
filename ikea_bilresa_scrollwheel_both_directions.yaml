@@ -82,6 +82,17 @@ blueprint:
           min: 5
           max: 50
 
+    transition_time:
+      name: "Transition Time (seconds)"
+      default: 1
+      selector:
+        number:
+          min: 0
+          max: 30
+          step: 0.5
+          unit_of_measurement: "s"
+
+
 trigger:
   - platform: state
     entity_id: !input scrollwheel_right_event_entity
@@ -156,6 +167,7 @@ action:
               entity_id: !input target_light
             data:
               brightness_step_pct: "{{ brightness_change }}"
+              transition: !input transition_time
         #else:
           # On extreme scroll → turn off
         #  - service: light.turn_off
@@ -173,11 +185,14 @@ action:
               entity_id: !input target_light
             data:
               brightness_pct: "{{ new_brightness | int }}"
+              transition: !input transition_time
         else:
           # Decreasing brightness → light stays off
           - service: light.turn_off
             target:
               entity_id: !input target_light
+            data:
+              transition: !input transition_time
 
 mode: queued
 max: 20
