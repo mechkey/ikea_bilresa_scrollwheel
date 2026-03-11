@@ -127,7 +127,7 @@ action:
       startup_bright: "{{ startup_bright_right if is_right_scroll else startup_bright_left }}"
       
       # Extract event type
-      event_type_str: "{{ state_attr(trigger.entity_id, 'event_type') }}"
+      event_type_str: '{{ state_attr(trigger.to_state.entity_id, ''event_type'') }}'
       
       # Calculate press count
       press_count:
