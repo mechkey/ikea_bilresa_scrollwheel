@@ -642,8 +642,8 @@ action:
       button3_hold_direction_value: !input button3_hold_direction
       button3_hold_brightness_step_value: !input button3_hold_brightness_step
       
-      event_type: "{{ state_attr(trigger.entity_id, 'event_type') }}"
-      trigger_entity: "{{ trigger.entity_id }}"
+      event_type: "{{ state_attr(trigger.to_state.entity_id, 'event_type') }}"
+      trigger_entity: "{{ trigger.to_state.entity_id }}"
 
   # ════════════════════════════════════════════════════════════
   # BUTTON 1 - 1× CLICK
